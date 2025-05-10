@@ -1,110 +1,129 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚨 ALERTA DE VAZAMENTO 🚨</title>
-    <style>
-        body {
-            background-color: black;
-            color: lime;
-            font-family: "Courier New", monospace;
-            text-align: center;
-            padding-top: 50px;
-            height: 100vh;
-            margin: 0;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🚨 ALERTA DE VAZAMENTO 🚨</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        .danger {
-            color: red;
-            font-size: 2em;
-            animation: piscar 1s infinite;
-        }
+    body {
+      background-color: black;
+      color: lime;
+      font-family: "Courier New", monospace;
+      text-align: center;
+      margin: 0;
+      padding: 20px 10px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        @keyframes piscar {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
+    .danger {
+      color: red;
+      font-size: 1.5em;
+      animation: piscar 1s infinite;
+      margin-bottom: 20px;
+    }
 
-        .terminal {
-            margin: 30px auto;
-            width: 90%;
-            max-width: 700px;
-            text-align: left;
-            border: 2px solid lime;
-            padding: 20px;
-            background-color: #111;
-        }
+    @keyframes piscar {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
 
-        .typing {
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            animation: typing 6s steps(60, end), blink 0.75s step-end infinite;
-            border-right: 2px solid lime;
-            font-size: 1em;
-        }
+    .terminal {
+      background-color: #111;
+      border: 2px solid lime;
+      padding: 15px;
+      text-align: left;
+      width: 100%;
+      max-width: 700px;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      font-size: 0.9em;
+      white-space: pre-wrap;
+    }
 
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
+    .fake-button {
+      margin-top: 25px;
+      padding: 12px 24px;
+      background-color: red;
+      color: white;
+      border: none;
+      font-size: 1.1em;
+      cursor: pointer;
+      animation: piscar 1.5s infinite;
+    }
 
-        @keyframes blink {
-            50% { border-color: transparent }
-        }
+    .typing::after {
+      content: '|';
+      animation: blink 1s infinite step-end;
+    }
 
-        .fake-button {
-            margin-top: 30px;
-            padding: 15px 30px;
-            background-color: red;
-            color: white;
-            border: none;
-            font-size: 1.2em;
-            cursor: pointer;
-            animation: piscar 1.5s infinite;
-        }
-    </style>
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="danger">🚨 ALERTA: VAZAMENTO DETECTADO! 🚨</div>
+  <div class="danger">🚨 ALERTA: VAZAMENTO DETECTADO! 🚨</div>
 
-    <div class="terminal">
-        <div class="typing"></div>
-        Conectando a servidores globais...<br>
-        Vazamento em: EUA, Brasil, China, Rússia...<br>
-        Extraindo dados: localização, histórico, apps usados...<br>
-        Rastreamento ativo. Não feche esta aba.<br>
-        CPF: 043.351.866-90<br>
-        Nome: Denilson Francisco Batista<br>
-        Banco: Caixa Econômica Federal<br>
-        PIX: R$500,00 processado com sucesso.
-      </div>
-    </div>
+  <div class="terminal">
+    <div id="typing" class="typing"></div>
+  </div>
 
-    <button class="fake-button" onclick="alert('Muito tarde... seus dados já foram enviados 😈')">
-        PARAR VAZAMENTO
-    </button>
+  <button class="fake-button" onclick="alert('Muito tarde... seus dados já foram enviados 😈')">
+    PARAR VAZAMENTO
+  </button>
 
-    <audio id="alarm" autoplay loop>
-        <source src="https://www.soundjay.com/button/beep-09.mp3" type="audio/mpeg">
-        Seu navegador não suporta áudio embutido.
-    </audio>
+  <audio id="alarm" autoplay loop>
+    <source src="https://www.soundjay.com/button/beep-09.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio embutido.
+  </audio>
 
-    <script>
-        // Forçar reprodução após interação do usuário (em alguns dispositivos móveis)
-        document.body.addEventListener('click', function() {
-            const alarm = document.getElementById('alarm');
-            if (alarm) {
-                alarm.play().catch(() => {}); // Evita erro se bloqueado
-            }
-        });
-    </script>
+  <script>
+    // Tocar som em dispositivos móveis
+    document.body.addEventListener('click', function () {
+      const alarm = document.getElementById('alarm');
+      if (alarm) alarm.play().catch(() => {});
+    });
+
+    // Efeito de digitação
+    const texto = [
+      "Conectando a servidores globais...",
+      "Vazamento em: EUA, Brasil, China, Rússia...",
+      "Extraindo dados: localização, histórico, apps usados...",
+      "Rastreamento ativo. Não feche esta aba.",
+      "CPF: 043.351.866-90",
+      "Nome: Denilson Francisco Batista",
+      "Banco: Caixa Econômica Federal",
+      "PIX: R$500,00 processado com sucesso."
+    ];
+
+    const typingDiv = document.getElementById("typing");
+    let linha = 0;
+    let char = 0;
+
+    function digitar() {
+      if (linha < texto.length) {
+        if (char < texto[linha].length) {
+          typingDiv.innerHTML += texto[linha][char];
+          char++;
+        } else {
+          typingDiv.innerHTML += "\n";
+          linha++;
+          char = 0;
+        }
+        setTimeout(digitar, 50);
+      }
+    }
+
+    digitar();
+  </script>
 
 </body>
 </html>
