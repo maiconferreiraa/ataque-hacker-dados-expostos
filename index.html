@@ -76,7 +76,7 @@
     <div id="typing" class="typing"></div>
   </div>
 
-  <button class="fake-button" onclick="tocarSom(); alert('Muito tarde... seus dados já foram enviados 😈')">
+  <button class="fake-button" onclick="iniciarAlerta()">
     PARAR VAZAMENTO
   </button>
 
@@ -88,9 +88,12 @@
   <script>
     const alarm = document.getElementById('alarm');
 
-    function tocarSom() {
-      alarm.play().catch((e) => {
-        console.log('Reprodução de som bloqueada até interação:', e);
+    function iniciarAlerta() {
+      // Reproduz som apenas após interação do usuário
+      alarm.play().then(() => {
+        alert('Muito tarde... seus dados já foram enviados 😈');
+      }).catch((error) => {
+        alert('Erro ao tentar reproduzir som: ' + error.message);
       });
     }
 
