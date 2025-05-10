@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🚨 ALERTA DE VAZAMENTO 🚨</title>
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       background-color: black;
@@ -64,37 +66,9 @@
     @keyframes blink {
       50% { opacity: 0; }
     }
-
-    #overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: black;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      flex-direction: column;
-    }
-
-    #overlay button {
-      font-size: 1.5em;
-      padding: 20px 40px;
-      background: red;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
-
-  <!-- Tela inicial para permitir som -->
-  <div id="overlay">
-    <div>Toque para iniciar o alerta</div>
-    <button onclick="iniciar()">INICIAR</button>
-  </div>
 
   <div class="danger">🚨 ALERTA: VAZAMENTO DETECTADO! 🚨</div>
 
@@ -102,7 +76,7 @@
     <div id="typing" class="typing"></div>
   </div>
 
-  <button class="fake-button" onclick="alert('Muito tarde... seus dados já foram enviados 😈')">
+  <button class="fake-button" onclick="tocarSom(); alert('Muito tarde... seus dados já foram enviados 😈')">
     PARAR VAZAMENTO
   </button>
 
@@ -113,8 +87,12 @@
 
   <script>
     const alarm = document.getElementById('alarm');
-    const overlay = document.getElementById('overlay');
-    const typingDiv = document.getElementById("typing");
+
+    function tocarSom() {
+      alarm.play().catch((e) => {
+        console.log('Reprodução de som bloqueada até interação:', e);
+      });
+    }
 
     const texto = [
       "Conectando a servidores globais...",
@@ -129,6 +107,7 @@
       "Mais dados sendo coletados..."
     ];
 
+    const typingDiv = document.getElementById("typing");
     let linha = 0;
     let char = 0;
 
@@ -146,11 +125,7 @@
       }
     }
 
-    function iniciar() {
-      overlay.style.display = 'none';
-      alarm.play().catch(err => console.log('Som bloqueado:', err));
-      digitar();
-    }
+    digitar();
   </script>
 
 </body>
