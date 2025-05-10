@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🚨 ALERTA DE VAZAMENTO 🚨</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       background-color: black;
       color: lime;
@@ -41,8 +37,6 @@
       text-align: left;
       width: 100%;
       max-width: 700px;
-      overflow-wrap: break-word;
-      word-break: break-word;
       font-size: 0.9em;
       white-space: pre-wrap;
     }
@@ -80,20 +74,24 @@
     PARAR VAZAMENTO
   </button>
 
-  <audio id="alarm" loop>
-    <source src="https://www.soundjay.com/button/beep-09.mp3" type="audio/mpeg">
-    Seu navegador não suporta áudio embutido.
+  <!-- Áudio com volume mais alto -->
+  <audio id="alarm" preload="auto" loop>
+    <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
   </audio>
 
   <script>
     const alarm = document.getElementById('alarm');
 
     function iniciarAlerta() {
-      // Reproduz som apenas após interação do usuário
+      // Garante que o áudio será tocado apenas após clique
       alarm.play().then(() => {
-        alert('Muito tarde... seus dados já foram enviados 😈');
+        // Espera um pouco antes do alert, para garantir som contínuo
+        setTimeout(() => {
+          alert('Muito tarde... seus dados já foram enviados 😈');
+        }, 300); // tempo pequeno para evitar bloqueios
       }).catch((error) => {
-        alert('Erro ao tentar reproduzir som: ' + error.message);
+        alert("Erro ao tocar o som: " + error.message);
       });
     }
 
