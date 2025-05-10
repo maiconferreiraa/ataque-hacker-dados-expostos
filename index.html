@@ -1,110 +1,90 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚨 ALERTA DE VAZAMENTO 🚨</title>
-    <style>
-        body {
-            background-color: black;
-            color: lime;
-            font-family: "Courier New", monospace;
-            text-align: center;
-            padding-top: 50px;
-            height: 100vh;
-            margin: 0;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🚨 ALERTA DE VAZAMENTO 🚨</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .danger {
-            color: red;
-            font-size: 2em;
-            animation: piscar 1s infinite;
-        }
+    body {
+      background-color: black;
+      color: lime;
+      font-family: "Courier New", monospace;
+      text-align: center;
+      padding: 20px 10px;
+    }
 
-        @keyframes piscar {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
+    .danger {
+      color: red;
+      font-size: 1.4em;
+      animation: piscar 1s infinite;
+      margin-bottom: 15px;
+    }
 
-        .terminal {
-            margin: 30px auto;
-            width: 90%;
-            max-width: 700px;
-            text-align: left;
-            border: 2px solid lime;
-            padding: 20px;
-            background-color: #111;
-        }
+    @keyframes piscar {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
 
-        .typing {
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            animation: typing 6s steps(60, end), blink 0.75s step-end infinite;
-            border-right: 2px solid lime;
-            font-size: 1em;
-        }
+    .terminal {
+      background-color: #111;
+      border: 2px solid lime;
+      padding: 10px;
+      text-align: left;
+      font-size: 0.9em;
+      max-width: 100%;
+      width: 100%;
+      margin: 0 auto 20px auto;
+      white-space: normal;
+      word-wrap: break-word;
+    }
 
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink {
-            50% { border-color: transparent }
-        }
-
-        .fake-button {
-            margin-top: 30px;
-            padding: 15px 30px;
-            background-color: red;
-            color: white;
-            border: none;
-            font-size: 1.2em;
-            cursor: pointer;
-            animation: piscar 1.5s infinite;
-        }
-    </style>
+    .fake-button {
+      padding: 10px 20px;
+      background-color: red;
+      color: white;
+      border: none;
+      font-size: 1em;
+      cursor: pointer;
+      animation: piscar 1.5s infinite;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="danger">🚨 ALERTA: VAZAMENTO DETECTADO! 🚨</div>
+  <div class="danger">🚨 ALERTA: VAZAMENTO DETECTADO! 🚨</div>
 
-    <div class="terminal">
-        <div class="typing">
-            Conectando a servidores globais...<br>
-            Vazamento detectado em: EUA, China, Rússia, Brasil, Alemanha, China...<br>
-            Extraindo dados de localização, histórico, e apps usados...<br>
-            Rastreamento ativo. Não feche esta aba.<br>
-            Coletando CPF ||||||||||||||||||||| 100% 043.351.866-90.<br>
-            Coletando Nome ||||||||||||||||||||| 100% Denilson Francisco Batista.<br>
-            Coletando dados Bancários ||||||||||||||||| 100% Banco Caixa Econômica<br>
-            PIX em processamento R$500,00 ||||||||||||||||100%.
-        </div>
-    </div>
+  <div class="terminal">
+    Conectando a servidores globais...<br>
+    Vazamento em: EUA, Brasil, China, Rússia...<br>
+    Extraindo dados: localização, histórico, apps usados...<br>
+    Rastreamento ativo. Não feche esta aba.<br>
+    CPF: 043.351.866-90<br>
+    Nome: Denilson Francisco Batista<br>
+    Banco: Caixa Econômica Federal<br>
+    PIX: R$500,00 processado com sucesso.
+  </div>
 
-    <button class="fake-button" onclick="alert('Muito tarde... seus dados já foram enviados 😈')">
-        PARAR VAZAMENTO
-    </button>
+  <button class="fake-button" onclick="alert('Muito tarde... seus dados já foram enviados 😈')">
+    PARAR VAZAMENTO
+  </button>
 
-    <audio id="alarm" autoplay loop>
-        <source src="https://www.soundjay.com/button/beep-09.mp3" type="audio/mpeg">
-        Seu navegador não suporta áudio embutido.
-    </audio>
+  <audio id="alarm" autoplay loop>
+    <source src="https://www.soundjay.com/button/beep-09.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio embutido.
+  </audio>
 
-    <script>
-        // Forçar reprodução após interação do usuário (em alguns dispositivos móveis)
-        document.body.addEventListener('click', function() {
-            const alarm = document.getElementById('alarm');
-            if (alarm) {
-                alarm.play().catch(() => {}); // Evita erro se bloqueado
-            }
-        });
-    </script>
+  <script>
+    document.body.addEventListener('click', function () {
+      const alarm = document.getElementById('alarm');
+      if (alarm) alarm.play().catch(() => {});
+    });
+  </script>
 
 </body>
 </html>
